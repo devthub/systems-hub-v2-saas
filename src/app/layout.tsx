@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 
 import './globals.css';
 
-import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 
 import { AppWrapperProvider } from '@/lib/contexts/App.context';
@@ -17,22 +16,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <ClerkProvider
-      appearance={{
-        layout: {
-          socialButtonsPlacement: 'bottom',
-          socialButtonsVariant: 'iconButton',
-          termsPageUrl: 'https://clerk.com/terms',
-        },
-      }}
-    >
-      <html lang="en" suppressHydrationWarning={true}>
-        <body className={inter.className} suppressHydrationWarning={true}>
-          <AppWrapperProvider>
-            <ChakraUIProvider>{children}</ChakraUIProvider>
-          </AppWrapperProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <AppWrapperProvider>
+          <ChakraUIProvider>{children}</ChakraUIProvider>
+        </AppWrapperProvider>
+      </body>
+    </html>
   );
 }

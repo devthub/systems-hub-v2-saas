@@ -96,7 +96,7 @@ export default function Navbar() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align="center">
           <Center>
-            <NextLink href={'/'} passHref legacyBehavior>
+            <NextLink href={'/'}>
               <Image
                 src="/assets/img/systems-hub-logo.png"
                 width={100}
@@ -115,23 +115,23 @@ export default function Navbar() {
 
         <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={2}>
           {(!isSignedIn && (
-            <>
-              <Button
-                // h={12}
-                px={6}
-                bgGradient="linear(to-br, #80bC00, #98D9F1)"
-                color="white"
-                _hover={{ bgGradient: 'linear(to-br, #80bC00, #80bC00)' }}
-                variant="solid"
-                size="sm"
-                rounded="md"
-                // fontWeight="bold"
-                mb={{ base: 2, sm: 0 }}
-                as={NextLink}
-                href="/get-started"
-              >
-                Get Started
-              </Button>
+            <Skeleton isLoaded={isLoaded}>
+              <NextLink href={'/get-started'}>
+                <Button
+                  // h={12}
+                  px={6}
+                  bgGradient="linear(to-br, #80bC00, #98D9F1)"
+                  color="white"
+                  _hover={{ bgGradient: 'linear(to-br, #80bC00, #80bC00)' }}
+                  variant="solid"
+                  size="sm"
+                  rounded="md"
+                  // fontWeight="bold"
+                  mb={{ base: 2, sm: 0 }}
+                >
+                  Get Started
+                </Button>
+              </NextLink>
 
               <Button
                 as={NextLink}
@@ -139,7 +139,7 @@ export default function Navbar() {
                 fontWeight={600}
                 color={'white'}
                 bg={'#80bC00'}
-                href={'/auth/signin'}
+                href={'/sign-in'}
                 _hover={{
                   bg: '#99c932',
                 }}
@@ -147,7 +147,7 @@ export default function Navbar() {
               >
                 Sign In
               </Button>
-            </>
+            </Skeleton>
           )) || (
             <Skeleton isLoaded={isLoaded}>
               <UserButton />
