@@ -1,0 +1,68 @@
+:root {
+  --code-color: darkred;
+  --code-bg-color: #aaaaaa;
+  --code-font-size: 14px;
+  --code-line-height: 1.4;
+  --scroll-bar-color: #c5c5c5;
+  --scroll-bar-bg-color: #f6f6f6;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scroll-bar-bg-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-bar-bg-color);
+}
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: calc(100% - 90px) !important;
+}
+.cdx-block {
+  max-width: 100% !important;
+}
+h1.ce-header {
+  font-size: 1.875rem;
+  font-weight: 900;
+  line-height: 2.25rem;
+}
+h2.ce-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+h3.ce-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+h4.ce-header {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+h5.ce-header {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+h6.ce-header {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
