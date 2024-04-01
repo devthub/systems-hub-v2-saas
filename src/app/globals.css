@@ -5,6 +5,8 @@
   --code-line-height: 1.4;
   --scroll-bar-color: #c5c5c5;
   --scroll-bar-bg-color: #f6f6f6;
+  --brand-blue: #082d87;
+  --brand-green: #80bd00;
 }
 
 ::-webkit-scrollbar-corner {
@@ -65,4 +67,15 @@ h6.ce-header {
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.5rem;
+}
+
+.cl-formButtonPrimary {
+  font-size: 14px;
+  text-transform: none;
+  background-color: var(--brand-green);
+}
+.cl-formButtonPrimary:hover,
+.cl-formButtonPrimary:focus,
+.cl-formButtonPrimary:active {
+  background-color: #8bcc00;
 }
