@@ -5,7 +5,7 @@ import { transporter } from '@/lib/api-helpers/transporter';
 import dbConnect from '@/lib/config/db-connect';
 import HttpException, { HttpCode, ReasonPhrase } from '@/lib/utils/http-exceptions';
 import UserModel from '@/models/User.model';
-import { UserOTP } from '@/types/user';
+import { UserOTP } from '@/types/user.types';
 import { createOtpHTMLEmail } from './contents';
 
 const HOUR_IN_MS = 3600000;

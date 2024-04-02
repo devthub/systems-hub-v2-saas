@@ -1,7 +1,7 @@
 import dbConnect from '@/lib/config/db-connect';
 import { RegisterFormValues, registerSchema } from '@/lib/validation-schemas/register-schema';
 import UserModel from '@/models/User.model';
-import { User } from '@/types/user';
+import { User } from '@/types/user.types';
 import { stripe } from '../stripe/get-stripe';
 
 export interface LoginFormValues {
