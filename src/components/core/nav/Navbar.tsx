@@ -4,7 +4,6 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
-  Center,
   Collapse,
   Flex,
   IconButton,
@@ -85,8 +84,9 @@ export default function Navbar() {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
+        justifyContent={{ base: 'space-between' }}
       >
-        <Flex flex={{ base: 1, md: 'auto' }} ml={{ base: -2 }} display={{ base: 'flex', md: 'none' }}>
+        <Flex display={{ base: 'flex', md: 'none' }}>
           <IconButton
             onClick={onToggle}
             icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
@@ -94,31 +94,29 @@ export default function Navbar() {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align="center">
-          <Center>
-            <NextLink href={'/'}>
-              <Image
-                src="/assets/img/systems-hub-logo.png"
-                width={100}
-                height={100}
-                // sizes={'100vw'}
-                style={{ width: 'auto', height: 'auto' }}
-                alt="logo"
-              />
-            </NextLink>
-          </Center>
+
+        <Flex flex={{ base: 1 }} justify={{ base: 'flex-start', md: 'start' }} align="center">
+          <NextLink href={'/'}>
+            <Image
+              src="/assets/img/systems-hub-logo.png"
+              width={100}
+              height={100}
+              // sizes={'100vw'}
+              style={{ width: 'auto', height: 'auto' }}
+              alt="logo"
+            />
+          </NextLink>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={2}>
+        <Stack flex={{ base: 0, md: 1 }} justify={'flex-end'} direction={'row'} spacing={2}>
           {(!isSignedIn && (
             <Skeleton isLoaded={isLoaded}>
               <NextLink href={'/get-started'}>
                 <Button
-                  // h={12}
                   px={6}
                   bgGradient="linear(to-br, #80bC00, #98D9F1)"
                   color="white"
@@ -128,25 +126,26 @@ export default function Navbar() {
                   rounded="md"
                   // fontWeight="bold"
                   mb={{ base: 2, sm: 0 }}
+                  marginRight={4}
                 >
                   Get Started
                 </Button>
               </NextLink>
 
-              <Button
-                as={NextLink}
-                display={{ base: 'none', md: 'inline-flex' }}
-                fontWeight={600}
-                color={'white'}
-                bg={'#80bC00'}
-                href={'/sign-in'}
-                _hover={{
-                  bg: '#99c932',
-                }}
-                size={'sm'}
-              >
-                Sign In
-              </Button>
+              <NextLink href={'/sign-in'}>
+                <Button
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontWeight={600}
+                  color={'white'}
+                  bg={'#80bC00'}
+                  _hover={{
+                    bg: '#99c932',
+                  }}
+                  size={'sm'}
+                >
+                  Sign In
+                </Button>
+              </NextLink>
             </Skeleton>
           )) || (
             <Skeleton isLoaded={isLoaded}>

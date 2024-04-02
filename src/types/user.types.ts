@@ -1,6 +1,14 @@
 import { Document } from 'mongoose';
 
-export type UserRole = 'super-admin' | 'admin' | 'basic';
+import { AgencyDocument } from './agency.types';
+
+export enum UserRole {
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  AGENCY_OWNER = 'AGENCY_OWNER',
+  AGENCY_ADMIN = 'AGENCY_ADMIN',
+  SUBACCOUNT_USER = 'SUBACCOUNT_USER',
+  SUBACCOUNT_GUEST = 'SUBACCOUNT_GUEST',
+}
 
 export interface User {
   _id: string;
@@ -17,8 +25,11 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
   otp: UserOTP;
-  role: UserRole;
+  role: 'SUPER_ADMIN' | 'AGENCY_OWNER' | 'AGENCY_ADMIN' | 'SUBACCOUNT_USER' | 'SUBACCOUNT_GUEST';
   stripeCustomerId: string;
+  agency: AgencyDocument | null;
+  // tickets: [Ticket];
+  // permissions: Permission[];
 }
 
 export interface UserOTP {
