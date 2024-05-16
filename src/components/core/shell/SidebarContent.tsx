@@ -1,7 +1,7 @@
 'use client';
 
+import { Link } from '@chakra-ui/next-js';
 import { Box, BoxProps, CloseButton, Flex, IconButton, Image, useColorModeValue } from '@chakra-ui/react';
-import NextLink from 'next/link';
 import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
 
 import { ISidebarLinkItem } from './AppShell';
@@ -47,7 +47,7 @@ const SidebarContent = ({ expandSidebar, setExpandSidebar, linkItems, onClose, .
           mb={4}
           transition={'ease'}
         >
-          <NextLink href={'/'} passHref legacyBehavior>
+          <Link href={'/'}>
             <Image
               style={{ transition: 'height 0.5s' }}
               src="/assets/img/systems-hub-logo-white.png"
@@ -58,7 +58,7 @@ const SidebarContent = ({ expandSidebar, setExpandSidebar, linkItems, onClose, .
                 cursor: 'pointer',
               }}
             />
-          </NextLink>
+          </Link>
 
           <CloseButton
             display={{ base: 'flex', md: 'none' }}

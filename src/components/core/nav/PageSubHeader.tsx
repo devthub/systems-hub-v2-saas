@@ -1,7 +1,7 @@
 'use client';
 
+import { Link } from '@chakra-ui/next-js';
 import { Button, Flex, Heading, HStack, IconButton, Spacer } from '@chakra-ui/react';
-import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MdAdd, MdKeyboardBackspace } from 'react-icons/md';
 
@@ -24,17 +24,18 @@ const PageSubHeader = ({ heading, actionLabel, actionLinkTo }: IPageSubHeaderPro
           fontSize={'2xl'}
           onClick={() => router.back()}
         />
+
         <Heading as={'h2'} fontSize={{ base: 'lg', lg: '2xl' }}>
           {heading}
         </Heading>
       </HStack>
+
       <Spacer />
+
       {actionLabel && actionLinkTo && (
-        <NextLink href={actionLinkTo}>
-          <Button as={'a'} variant={'outline'} colorScheme="green" leftIcon={<MdAdd />} size="sm">
-            {actionLabel}
-          </Button>
-        </NextLink>
+        <Button as={Link} href={actionLinkTo} variant={'outline'} colorScheme="green" leftIcon={<MdAdd />} size="sm">
+          {actionLabel}
+        </Button>
       )}
     </Flex>
   );

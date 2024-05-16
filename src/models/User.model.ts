@@ -28,20 +28,17 @@ const UserSchema: Schema<UserDocument> = new Schema<UserDocument>(
         message: 'Invalid email format!',
       },
     },
-    password: { type: String, required: true, select: false },
-    hash: String,
-    salt: String,
+    password: { type: String, select: false },
+    hash: { type: String, select: false },
+    salt: { type: String, select: false },
     role: {
       type: String,
       enum: ['SUPER_ADMIN', 'AGENCY_OWNER', 'AGENCY_ADMIN', 'SUBACCOUNT_USER', 'SUBACCOUNT_GUEST'],
       default: 'SUBACCOUNT_USER',
     },
     stripeCustomerId: String,
-    agency: {
-      type: mongoose.Schema.Types.ObjectId,
-      default: null,
-      ref: 'Agency',
-    },
+    agency: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Agency' },
+    permissions: [{ type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Permission' }],
   },
   { timestamps: true }
 );

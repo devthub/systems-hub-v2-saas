@@ -9,6 +9,7 @@ const MediaFileSchema: Schema<MediaFileDocument> = new Schema<MediaFileDocument>
     name: { type: String, required: true },
     link: { type: String, unique: true, required: true }, // Ensure uniqueness and required
     subAccount: { type: Schema.Types.ObjectId, ref: 'SubAccount', required: true }, // Reference SubAccount model
+    metaData: { type: Object },
   },
   { timestamps: true }
 ); // Enable timestamps

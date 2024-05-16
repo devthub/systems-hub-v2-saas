@@ -1,8 +1,8 @@
 'use client';
 
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { Collapse, Flex, Icon, Link, Stack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Link } from '@chakra-ui/next-js';
+import { Collapse, Flex, Icon, Stack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 
 import { INavItem, NAV_ITEMS } from './Navbar';
 
@@ -14,7 +14,7 @@ const MobileNavItem = ({ label, children, href }: INavItem) => {
       <Flex
         py={2}
         as={Link}
-        href={href ?? '#'}
+        href={href || '#'}
         justify={'space-between'}
         align={'center'}
         _hover={{
@@ -46,7 +46,7 @@ const MobileNavItem = ({ label, children, href }: INavItem) => {
         >
           {children &&
             children.map((child) => (
-              <Link as={NextLink} key={child.label} href={child.href || '#'} legacyBehavior passHref>
+              <Link key={child.label} href={child.href || '#'}>
                 {child.label}
               </Link>
             ))}

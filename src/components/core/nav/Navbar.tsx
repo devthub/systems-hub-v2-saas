@@ -1,6 +1,7 @@
 'use client';
 
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { Link } from '@chakra-ui/next-js';
 import {
   Box,
   Button,
@@ -14,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { UserButton, useSession } from '@clerk/nextjs';
 import Image from 'next/image';
-import NextLink from 'next/link';
 
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
@@ -65,6 +65,10 @@ export const NAV_ITEMS: Array<INavItem> = [
     label: 'Affiliates',
     href: '/affiliates',
   },
+  {
+    label: 'Agency',
+    href: '/agency',
+  },
 ];
 
 export default function Navbar() {
@@ -96,16 +100,18 @@ export default function Navbar() {
         </Flex>
 
         <Flex flex={{ base: 1 }} justify={{ base: 'flex-start', md: 'start' }} align="center">
-          <NextLink href={'/'}>
+          <Link href={'/'}>
             <Image
               src="/assets/img/systems-hub-logo.png"
+              blurDataURL="/assets/img/systems-hub-logo.png"
+              priority
               width={100}
               height={100}
               // sizes={'100vw'}
               style={{ width: 'auto', height: 'auto' }}
               alt="logo"
             />
-          </NextLink>
+          </Link>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
@@ -115,37 +121,37 @@ export default function Navbar() {
         <Stack flex={{ base: 0, md: 1 }} justify={'flex-end'} direction={'row'} spacing={2}>
           {(!isSignedIn && (
             <Skeleton isLoaded={isLoaded}>
-              <NextLink href={'/get-started'}>
-                <Button
-                  px={6}
-                  bgGradient="linear(to-br, #80bC00, #98D9F1)"
-                  color="white"
-                  _hover={{ bgGradient: 'linear(to-br, #80bC00, #80bC00)' }}
-                  variant="solid"
-                  size="sm"
-                  rounded="md"
-                  // fontWeight="bold"
-                  mb={{ base: 2, sm: 0 }}
-                  marginRight={4}
-                >
-                  Get Started
-                </Button>
-              </NextLink>
+              <Button
+                as={Link}
+                href={'/get-started'}
+                px={6}
+                bgGradient="linear(to-br, #80bC00, #98D9F1)"
+                color="white"
+                _hover={{ bgGradient: 'linear(to-br, #80bC00, #80bC00)' }}
+                variant="solid"
+                size="sm"
+                rounded="md"
+                // fontWeight="bold"
+                mb={{ base: 2, sm: 0 }}
+                marginRight={4}
+              >
+                Get Started
+              </Button>
 
-              <NextLink href={'/sign-in'}>
-                <Button
-                  display={{ base: 'none', md: 'inline-flex' }}
-                  fontWeight={600}
-                  color={'white'}
-                  bg={'#80bC00'}
-                  _hover={{
-                    bg: '#99c932',
-                  }}
-                  size={'sm'}
-                >
-                  Sign In
-                </Button>
-              </NextLink>
+              <Button
+                as={Link}
+                href={'/sign-in'}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontWeight={600}
+                color={'white'}
+                bg={'#80bC00'}
+                _hover={{
+                  bg: '#99c932',
+                }}
+                size={'sm'}
+              >
+                Sign In
+              </Button>
             </Skeleton>
           )) || (
             <Skeleton isLoaded={isLoaded}>
