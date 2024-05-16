@@ -1,5 +1,6 @@
 'use client';
 
+import { Link } from '@chakra-ui/next-js';
 import {
   Button,
   Flex,
@@ -10,14 +11,12 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Stack,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useFormik } from 'formik';
 import Image from 'next/image';
-import NextLink from 'next/link';
 import { useState, useTransition } from 'react';
 
 import { CustomInputFormControl } from '@/components/core/custom-form-controls/FormControls';
@@ -160,7 +159,7 @@ const RegisterForm = () => {
 
             <Stack spacing={6} mt={4}>
               <Stack direction={{ base: 'column', sm: 'row' }} align={'start'} justify={'space-between'}>
-                <Link as={NextLink} href={'/signin'} color={'blue.500'}>
+                <Link href={'/sign-in'} color={'blue.500'}>
                   Login
                 </Link>
                 {/* <Link color={'blue.500'}>Forgot password?</Link> */}

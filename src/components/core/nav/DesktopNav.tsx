@@ -1,11 +1,11 @@
 'use client';
 
 import { ChevronRightIcon } from '@chakra-ui/icons';
+import { Link } from '@chakra-ui/next-js';
 import {
   Box,
   Flex,
   Icon,
-  Link,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -13,15 +13,13 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import NextLink from 'next/link';
 
 import { INavItem, NAV_ITEMS } from './Navbar';
 
 const DesktopSubNav = ({ label, href, subLabel }: INavItem) => {
   return (
     <Link
-      as={NextLink}
-      href={href}
+      href={href || '#'}
       role={'group'}
       display={'block'}
       p={2}
@@ -64,11 +62,9 @@ const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              {/* <NextLink href={navItem.href ?? '#'} passHref legacyBehavior> */}
               <Link
-                as={NextLink}
                 p={2}
-                href={navItem.href ?? '#'}
+                href={navItem.href || '#'}
                 fontSize={'sm'}
                 fontWeight={500}
                 color={linkColor}
@@ -79,7 +75,6 @@ const DesktopNav = () => {
               >
                 {navItem.label}
               </Link>
-              {/* </NextLink> */}
             </PopoverTrigger>
 
             {navItem.children && (

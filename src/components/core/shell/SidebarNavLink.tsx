@@ -1,7 +1,7 @@
 'use client';
 
+import { Link } from '@chakra-ui/next-js';
 import {
-  Link as ChakraLink,
   Flex,
   Icon,
   LinkProps,
@@ -10,7 +10,6 @@ import {
   // useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
-import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { IconType } from 'react-icons';
@@ -42,8 +41,7 @@ function SidebarNavLink({
 
   if (isActive) {
     return (
-      <ChakraLink
-        as={NextLink}
+      <Link
         style={{ textDecoration: 'none' }}
         _focus={{ boxShadow: 'none' }}
         fontWeight="bold"
@@ -51,6 +49,7 @@ function SidebarNavLink({
         {...activeProps}
         _hover={{ color: 'selected' }}
         color={color}
+        href={to || '#'}
       >
         <Tooltip label={children} aria-label={`for ${children}`} placement="right" hasArrow>
           <Flex
@@ -90,12 +89,12 @@ function SidebarNavLink({
             </Text>
           </Flex>
         </Tooltip>
-      </ChakraLink>
+      </Link>
     );
   }
 
   return (
-    <ChakraLink as={NextLink} {...props} _hover={{ color: 'selected' }}>
+    <Link {...props} href={to || '#'} _hover={{ color: 'selected' }}>
       <Tooltip label={children} aria-label={`for ${children}`} placement="right" hasArrow>
         <Flex
           direction={{ base: 'row', md: expanded ? 'row' : 'column' }}
@@ -130,7 +129,7 @@ function SidebarNavLink({
           </Text>
         </Flex>
       </Tooltip>
-    </ChakraLink>
+    </Link>
   );
 }
 

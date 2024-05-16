@@ -1,7 +1,14 @@
+import { FilterQuery } from 'mongoose';
+
 import dbConnect from '@/lib/config/db-connect';
 import { RegisterFormValues, registerSchema } from '@/lib/validation-schemas/register-schema';
+import AgencyModel from '@/models/Agency.model';
+import AgencySideBarOptionModel from '@/models/AgencySideBarOption.model';
+import PermissionModel from '@/models/Permission.model';
+import SubAccountModel from '@/models/SubAccount.model';
+import SubAccountSideBarOptionsModel from '@/models/SubAccountSideBarOptions.model';
 import UserModel from '@/models/User.model';
-import { User } from '@/types/user';
+import { User } from '@/types/user.types';
 import { stripe } from '../stripe/get-stripe';
 
 export interface LoginFormValues {
@@ -81,9 +88,37 @@ const createNewUser = async (registerInput: RegisterFormValues) => {
   return user;
 };
 
+const getUserDetails = async ({ where }: { where: FilterQuery<User> }): Promise<User | null> => {
+  await dbConnect();
+
+  const userExists = UserModel.findOne(where)
+    .populate({
+      path: 'agency',
+      model: AgencyModel,
+      populate: [
+        { path: 'sidebarOptions', model: AgencySideBarOptionModel },
+        {
+          path: 'subAccounts',
+          model: SubAccountModel,
+          populate: { path: 'sidebarOptions', model: SubAccountSideBarOptionsModel },
+        },
+      ],
+    })
+    .populate({
+      path: 'permissions',
+      model: PermissionModel,
+    })
+    .select('-password -hash -salt');
+
+  if (!userExists) return null;
+
+  return userExists;
+};
+
 const UserService = {
   authenticate,
   createNewUser,
+  getUserDetails,
 };
 
 export default UserService;

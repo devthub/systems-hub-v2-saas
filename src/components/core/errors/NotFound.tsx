@@ -1,7 +1,7 @@
 'use client';
 
+import { Link } from '@chakra-ui/next-js';
 import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import Link from 'next/link';
 
 function NotFound() {
   return (

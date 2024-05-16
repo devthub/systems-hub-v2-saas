@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import mongoose, { CallbackError, Document, Schema } from 'mongoose';
 
-import { User } from '@/types/user';
+import { User } from '@/types/user.types';
 
 // Define interface for User document
 export interface UserDocument extends User, Document {
@@ -11,20 +11,34 @@ export interface UserDocument extends User, Document {
 }
 
 // Define schema for User
-const UserSchema: Schema<UserDocument> = new Schema(
+const UserSchema: Schema<UserDocument> = new Schema<UserDocument>(
   {
-    name: String,
-    username: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
+    username: { type: String, unique: true },
     email: {
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
+      validate: {
+        validator: function (value: string) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(value);
+        },
+        message: 'Invalid email format!',
+      },
     },
-    password: { type: String, required: true, select: false },
-    hash: String,
-    salt: String,
-    role: { type: String, default: 'basic' },
+    password: { type: String, select: false },
+    hash: { type: String, select: false },
+    salt: { type: String, select: false },
+    role: {
+      type: String,
+      enum: ['SUPER_ADMIN', 'AGENCY_OWNER', 'AGENCY_ADMIN', 'SUBACCOUNT_USER', 'SUBACCOUNT_GUEST'],
+      default: 'SUBACCOUNT_USER',
+    },
     stripeCustomerId: String,
+    agency: { type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Agency' },
+    permissions: [{ type: mongoose.Schema.Types.ObjectId, default: null, ref: 'Permission' }],
   },
   { timestamps: true }
 );
